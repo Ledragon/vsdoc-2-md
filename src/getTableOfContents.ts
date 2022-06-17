@@ -1,4 +1,6 @@
-export function getTableOfContents(ctx) {
+import { Context } from './Context';
+
+export function getTableOfContents(ctx: Context) {
     var numTypes = ctx.types.length;
     var numTypesPerRow = 2;
     var numRows = Math.ceil(numTypes / numTypesPerRow);

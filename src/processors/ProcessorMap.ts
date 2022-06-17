@@ -1,4 +1,4 @@
-import { Context } from 'src/Context';
+import { Context } from '../Context';
 import { processAssembly } from './processAssembly';
 import { processC } from './processC';
 import { processCode } from './processCode';

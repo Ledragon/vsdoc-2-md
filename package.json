@@ -4,6 +4,7 @@
   "description": "vsdoc-2-md is an online Visual Studio XML documentation to Markdown converter. Its aim is to enable to quickly scaffold API documentation for sites such as GitHub.",
   "main": "convert.js",
   "scripts": {
+    "build": "tsc -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

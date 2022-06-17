@@ -3,7 +3,7 @@ import { process } from './processors';
 import { getTableOfContents } from './getTableOfContents';
 import { stripEmptyTextNodes } from './utils';
 
-export function vsdocToMarkdown(vsdoc) {
+export function vsdocToMarkdown(vsdoc: string) {
     const parser = new DOMParser();
     const xml = parser.parseFromString(vsdoc, 'text/xml');
     const ctx: Context = {

@@ -1,7 +1,7 @@
 import { Context } from '../Context';
 import ProcessorMap from './ProcessorMap';
 
-export function process(ctx: Context, node: Element) {
+export function process(ctx: Context, node: Node) {
     for (let i = 0; i < node.childNodes.length; i++) {
         const childNode = node.childNodes[i] as Element;
 

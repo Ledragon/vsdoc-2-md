@@ -1,7 +1,7 @@
 import { Context } from '../Context';
 import { findChildNodes } from './findChildNodes';
 
-export function rearrangeParametersInContext(ctx: Context, memberNode) {
+export function rearrangeParametersInContext(ctx: Context, memberNode: Element & { name?: string; }) {
     var methodPrototype = memberNode.name;
     var matches = methodPrototype.match(/\((.*)\)/);
     if (!matches) {
