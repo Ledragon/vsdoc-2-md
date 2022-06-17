@@ -1,6 +1,8 @@
 ## What is this sorcery?
 
-vsdoc-2-md is an online Visual Studio XML documentation to Markdown converter. It's aim is to enable to quickly scaffold API documentation for sites such as GitHub.
+vsdoc-2-md is an online Visual Studio XML documentation to Markdown converter. Its aim is to enable to quickly scaffold API documentation for sites such as GitHub.
+
+This fork aims at splitting code and converting it to TypeScript.
 
 Included is a basic Markdown editor as well as an HTML preview.
 
