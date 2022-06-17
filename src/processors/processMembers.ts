@@ -1,13 +1,14 @@
 import { sanitizeMarkdown } from '../utils';
-import { process } from '../process';
+import { process } from '.';
+import { Context } from '../Context';
 
-export function processMembers(ctx, membersNode) {
+export function processMembers(ctx: Context, membersNode: Element) {
     ctx.indices.members = ctx.markdown.length;
 
     // 1. Extract type and name from members.
-    let childElements:any[] = [];
+    let childElements: any[] = [];
     for (var i = 0; i < membersNode.childNodes.length; i++) {
-        let childNode = membersNode.childNodes[i];
+        let childNode = membersNode.childNodes[i] as Element;
         if (childNode.nodeType === Node.ELEMENT_NODE) {
             var childName = childNode.getAttribute('name');
             childNode.type = childName.substring(0, 1);

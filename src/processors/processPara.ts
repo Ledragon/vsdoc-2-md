@@ -1,7 +1,7 @@
 import { Context } from '../Context';
-import { process } from '../process';
+import { process } from '.';
 
-export function processPara(ctx: Context, paraNode) {
+export function processPara(ctx: Context, paraNode: Element) {
     ctx.markdown.push('\n');
     process(ctx, paraNode);
     ctx.markdown.push('\n');

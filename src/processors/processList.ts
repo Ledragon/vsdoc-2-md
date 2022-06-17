@@ -1,18 +1,23 @@
-export function processList(ctx, listNode) {
-    var type = listNode.getAttribute('type');
-    var newline = (ctx.nodeStack[ctx.nodeStack.length - 2] === 'param') ? '<br>' : '\n';
+import { Context } from '../Context';
+import { process } from './process';
+import { findChildNode, findChildNodes } from '../utils';
+
+export function processList(ctx: Context, listNode: Element) {
+    const type = listNode.getAttribute('type');
+    const newline = (ctx.nodeStack[ctx.nodeStack.length - 2] === 'param') ? '<br>' : '\n';
     if (type) {
         ctx.markdown.push(newline);
         if (type === 'table') {
             var listheaderElement = findChildNode(listNode, 'listheader');
-            var listheaderTermElements = findChildNodes(listheaderElement, 'term')
-            ctx.markdown.push('| ');
-            for (var i = 0; i < listheaderTermElements.length; i++) {
-                ctx.markdown.push(listheaderTermElements[i].textContent);
-                ctx.markdown.push(' | ');
+            if (listheaderElement !== undefined) {
+                var listheaderTermElements = findChildNodes(listheaderElement, 'term')
+                ctx.markdown.push('| ');
+                for (var i = 0; i < listheaderTermElements.length; i++) {
+                    ctx.markdown.push(listheaderTermElements[i].textContent || '');
+                    ctx.markdown.push(' | ');
+                }
+                ctx.markdown.push(newline);
             }
-            ctx.markdown.push(newline);
-
             itemElements = findChildNodes(listNode, 'item');
             for (var i = 0; i < itemElements.length; i++) {
                 var itemTermElements = findChildNodes(itemElements[i], 'term');
@@ -27,9 +32,9 @@ export function processList(ctx, listNode) {
             var prefixFn;
             if (type === 'number') {
                 var counter = 1;
-                prefixFn = function() { return counter++ + '. '; };
+                prefixFn = function () { return counter++ + '. '; };
             } else { // Bullet.
-                prefixFn = function() { return '- '; };
+                prefixFn = function () { return '- '; };
             }
             var itemElements = findChildNodes(listNode, 'item');
             for (var i = 0; i < itemElements.length; i++) {

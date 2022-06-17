@@ -1,5 +1,8 @@
-export function processTypeparam(ctx, typeparamNode) {
-    var name = typeparamNode.getAttribute('name');
+import { Context } from '../Context';
+import { process } from './process';
+
+export function processTypeparam(ctx: Context, typeparamNode: Element) {
+    const name = typeparamNode.getAttribute('name');
     if (name) {
         if (ctx.previousNode !== 'typeparam') {
             ctx.markdown.push('\n#### Type Parameters\n\n');

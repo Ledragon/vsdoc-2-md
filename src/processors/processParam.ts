@@ -1,6 +1,7 @@
+import { Context } from '../Context';
 import { process } from './process';
 
-export function processParam(ctx, paramNode) {
+export function processParam(ctx: Context, paramNode: Element) {
     var paramName = paramNode.getAttribute('name');
     var paramType = ctx.paramTypes[paramName];
 

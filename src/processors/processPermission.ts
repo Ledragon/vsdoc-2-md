@@ -1,13 +1,15 @@
+import { Context } from '../Context';
+import { process } from './process';
 import { sanitizeMarkdown } from '../utils';
 
-export function processPermission(ctx, permissionNode) {
-    var cref = permissionNode.getAttribute('cref');
+export function processPermission(ctx: Context, permissionNode: Element) {
+    const cref = permissionNode.getAttribute('cref');
     if (cref) {
         if (ctx.previousNode !== 'permission') {
             ctx.markdown.push('\n#### Permissions\n\n');
         }
 
-        var permissionName = sanitizeMarkdown(cref.substring(2));
+        let permissionName = sanitizeMarkdown(cref.substring(2));
         permissionName = permissionName.replace(ctx.namespace + '.', '');
 
         ctx.markdown.push('- ');

@@ -1,5 +1,9 @@
-export function processCode(ctx, codeNode) {
+import { Context } from '../Context';
+
+export function processCode(ctx: Context, codeNode: Element) {
     ctx.markdown.push('\n```\n');
-    ctx.markdown.push(codeNode.textContent);
+    if (codeNode?.textContent) {
+        ctx.markdown.push(codeNode.textContent);
+    }
     ctx.markdown.push('\n```\n');
 }

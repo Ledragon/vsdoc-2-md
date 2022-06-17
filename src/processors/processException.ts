@@ -1,7 +1,11 @@
-export function processException(ctx, exceptionNode) {
+import { Context } from '../Context';
+import { process } from '.';
+import { sanitizeMarkdown } from '../utils';
+
+export function processException(ctx: Context, exceptionNode: Element) {
     var cref = exceptionNode.getAttribute('cref');
     if (cref) {
-        var exName = sanitizeMarkdown(cref.substring(2));
+        let exName = sanitizeMarkdown(cref.substring(2));
         exName = exName.replace(ctx.namespace + '.', '');
 
         ctx.markdown.push('\n*');

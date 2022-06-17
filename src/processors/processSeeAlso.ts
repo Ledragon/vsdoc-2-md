@@ -1,4 +1,8 @@
-export function processSeealso(ctx, seealsoNode) {
+import { Context } from '../Context';
+import { processSee } from './processSee';
+
+
+export function processSeealso(ctx: Context, seealsoNode: Element) {
     if (ctx.previousNode !== 'seealso') {
         ctx.markdown.push('\n#### See also\n');
     }

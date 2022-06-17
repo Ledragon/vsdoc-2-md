@@ -1,7 +1,10 @@
-export function processSee(ctx, seeNode) {
-    var cref = seeNode.getAttribute('cref'); // For example: T:System.String
+import { Context } from '../Context';
+import { sanitizeMarkdown } from '../utils';
+
+export function processSee(ctx: Context, seeNode: Element) {
+    const cref = seeNode.getAttribute('cref'); // For example: T:System.String
     if (cref) {
-        var typeName = sanitizeMarkdown(cref.substring(2));
+        let typeName = sanitizeMarkdown(cref.substring(2));
         typeName = typeName.replace(ctx.namespace + '.', '');
         ctx.markdown.push('<a href="#');
         ctx.markdown.push(typeName.toLowerCase());
@@ -9,7 +12,7 @@ export function processSee(ctx, seeNode) {
         ctx.markdown.push(typeName);
         ctx.markdown.push('</a>');
     } else {
-        var href = seeNode.getAttribute('href'); // For example: http://stackoverflow.com/
+        const href = seeNode.getAttribute('href'); // For example: http://stackoverflow.com/
         if (href) {
             ctx.markdown.push('<a href="');
             ctx.markdown.push(href);

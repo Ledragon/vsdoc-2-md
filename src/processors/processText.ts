@@ -1,6 +1,7 @@
+import { Context } from '../Context';
 import { trimEnd, trimStart } from '../utils';
 
-export function processText(ctx, textNode) {
+export function processText(ctx: Context, textNode: Element) {
     if (!ctx.previousNode || ctx.previousNode === 'list' || ctx.previousNode === 'code') {
         textNode.nodeValue = trimStart(textNode.nodeValue);
     }
