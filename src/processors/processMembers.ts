@@ -8,7 +8,7 @@ export function processMembers(ctx: Context, membersNode: Element) {
     // 1. Extract type and name from members.
     let childElements: any[] = [];
     for (var i = 0; i < membersNode.childNodes.length; i++) {
-        let childNode = membersNode.childNodes[i] as Element;
+        let childNode = membersNode.childNodes[i] as Element & { type?: string; name?: string }; // Awful on-th-fly casting
         if (childNode.nodeType === Node.ELEMENT_NODE) {
             var childName = childNode.getAttribute('name');
             childNode.type = childName.substring(0, 1);

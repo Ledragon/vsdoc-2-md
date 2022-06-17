@@ -2,7 +2,7 @@ import { Context } from '../Context';
 import { rearrangeParametersInContext } from '../utils';
 import { process } from '.';
 
-export function processMember(ctx: Context, memberNode: Element) {
+export function processMember(ctx: Context, memberNode: Element & { type?: string; name?: string }) {
     var type = memberNode.type;
     var name = memberNode.name;
 
