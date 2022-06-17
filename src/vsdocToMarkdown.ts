@@ -1,12 +1,12 @@
-import { Context } from "./Context";
-import { process } from "./process";
-import { getTableOfContents } from "./getTableOfContents";
-import { stripEmptyTextNodes } from "./stripEmptyTextNodes";
+import { Context } from './Context';
+import { process } from './processors';
+import { getTableOfContents } from './getTableOfContents';
+import { stripEmptyTextNodes } from './utils';
 
 export function vsdocToMarkdown(vsdoc) {
-    var parser = new DOMParser();
-    var xml = parser.parseFromString(vsdoc, 'text/xml');
-    var ctx: Context = {
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(vsdoc, 'text/xml');
+    const ctx: Context = {
         markdown: [], // Output will be appended here.
         paramTypes: {}, // Used to map method signature names to types.
         nodeStack: [], // Used to keep track of current position in the node tree.

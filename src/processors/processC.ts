@@ -1,7 +1,9 @@
 import { Context } from '../Context';
 
-export function processC(ctx: Context, cNode) {
+export function processC(ctx: Context, cNode: Node) {
     ctx.markdown.push('`');
-    ctx.markdown.push(cNode.textContent);
+    if (cNode?.textContent) {
+        ctx.markdown.push(cNode.textContent);
+    }
     ctx.markdown.push('`');
 }

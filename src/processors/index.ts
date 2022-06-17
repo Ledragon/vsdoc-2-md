@@ -1,2 +1,1 @@
-export * from './processAssembly';
-export * from './processDoc';
+export * from './process';

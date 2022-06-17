@@ -9,6 +9,7 @@ export interface Context {
     indices: {
         members: any;
     }; // Keeps track of indices of different document parts to later inject content.   
-    previousNode?: any;
-    nextNode?: any;
+    
+    previousNode?: string;
+    nextNode?: string;
 }
