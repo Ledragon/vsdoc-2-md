@@ -4,30 +4,30 @@ var Convert = (function () {
 
     // Supported tags are taken from https://msdn.microsoft.com/en-us/library/5ast78ax.aspx
     // Note that <include> and <inheritdoc> tags are not supported!
-    var processorMap = {
-        'doc': processDoc,
-        'assembly': processAssembly,
-        'members': processMembers,
-        'member': processMember,
-        'summary': processSummary,
-        'value': processValue,
-        'typeparam': processTypeparam,
-        'remarks': processRemarks,
-        'para': processPara,
-        'param': processParam,
-        'returns': processReturns,
-        'example': processExample,
-        'permission': processPermission,
-        'exception': processException,
-        'list': processList,
-        'code': processCode,
-        'seealso': processSeealso,
-        'paramref': processParamref,
-        'typeparamref': processTypeparamref,
-        'see': processSee,
-        'c': processC,
-        '#text': processText
-    };
+    // var processorMap = {
+    //     'doc': processDoc,
+    //     'assembly': processAssembly,
+    //     'members': processMembers,
+    //     'member': processMember,
+    //     'summary': processSummary,
+    //     'value': processValue,
+    //     'typeparam': processTypeparam,
+    //     'remarks': processRemarks,
+    //     'para': processPara,
+    //     'param': processParam,
+    //     'returns': processReturns,
+    //     'example': processExample,
+    //     'permission': processPermission,
+    //     'exception': processException,
+    //     'list': processList,
+    //     'code': processCode,
+    //     'seealso': processSeealso,
+    //     'paramref': processParamref,
+    //     'typeparamref': processTypeparamref,
+    //     'see': processSee,
+    //     'c': processC,
+    //     '#text': processText
+    // };
 
     return {
         markdownToHtml: function (markdown) {
@@ -36,43 +36,43 @@ var Convert = (function () {
             return marked(markdown);
         },
 
-        vsdocToMarkdown: function (vsdoc) {
-            var parser = new DOMParser();
-            var xml = parser.parseFromString(vsdoc, 'text/xml');
-            var ctx = {
-                markdown: [], // Output will be appended here.
-                paramTypes: {}, // Used to map method signature names to types.
-                nodeStack: [], // Used to keep track of current position in the node tree.
-                types: [], // Table of contents will be generated based on types in assembly.
-                indices: {} // Keeps track of indices of different document parts to later inject content.
-            };
+        // vsdocToMarkdown: function (vsdoc) {
+        //     var parser = new DOMParser();
+        //     var xml = parser.parseFromString(vsdoc, 'text/xml');
+        //     var ctx = {
+        //         markdown: [], // Output will be appended here.
+        //         paramTypes: {}, // Used to map method signature names to types.
+        //         nodeStack: [], // Used to keep track of current position in the node tree.
+        //         types: [], // Table of contents will be generated based on types in assembly.
+        //         indices: {} // Keeps track of indices of different document parts to later inject content.
+        //     };
 
-            stripEmptyTextNodes(xml);
-            process(ctx, xml);
+        //     stripEmptyTextNodes(xml);
+        //     process(ctx, xml);
 
-            // Attach table of contents before members.
-            ctx.markdown.splice(ctx.indices.members, 0, getTableOfContents(ctx));
-            return ctx.markdown.join('');
-        }
+        //     // Attach table of contents before members.
+        //     ctx.markdown.splice(ctx.indices.members, 0, getTableOfContents(ctx));
+        //     return ctx.markdown.join('');
+        // }
     };
 
     /*********************/
     /* 1. Tag processors */
     /*********************/
 
-    function process(ctx, node) {
-        for (var i = 0; i < node.childNodes.length; i++) {
-            var childNode = node.childNodes[i];
+    // function process(ctx, node) {
+    //     for (var i = 0; i < node.childNodes.length; i++) {
+    //         var childNode = node.childNodes[i];
 
-            ctx.previousNode = (i === 0) ? undefined : node.childNodes[i - 1].nodeName;
-            ctx.nextNode = (i === node.childNodes.length - 1) ? undefined : node.childNodes[i + 1].nodeName;
+    //         ctx.previousNode = (i === 0) ? undefined : node.childNodes[i - 1].nodeName;
+    //         ctx.nextNode = (i === node.childNodes.length - 1) ? undefined : node.childNodes[i + 1].nodeName;
 
-            ctx.nodeStack.push(childNode.nodeName);
-            var processor = processorMap[childNode.nodeName];
-            if (processor) processor(ctx, childNode);
-            ctx.nodeStack.pop();
-        }
-    }
+    //         ctx.nodeStack.push(childNode.nodeName);
+    //         var processor = processorMap[childNode.nodeName];
+    //         if (processor) processor(ctx, childNode);
+    //         ctx.nodeStack.pop();
+    //     }
+    // }
 
     function processDoc(ctx, docNode) {
         process(ctx, docNode);
@@ -487,30 +487,30 @@ var Convert = (function () {
         }
     }
 
-    function getTableOfContents(ctx) {
-        var numTypes = ctx.types.length;
-        var numTypesPerRow = 2;
-        var numRows = Math.ceil(numTypes / numTypesPerRow);
-        var tableOfContents = ['\n<table>\n<tbody>\n'];
+    // function getTableOfContents(ctx) {
+    //     var numTypes = ctx.types.length;
+    //     var numTypesPerRow = 2;
+    //     var numRows = Math.ceil(numTypes / numTypesPerRow);
+    //     var tableOfContents = ['\n<table>\n<tbody>\n'];
 
-        for (var i = 0; i < numRows; i++) {
-            tableOfContents.push('<tr>\n');
+    //     for (var i = 0; i < numRows; i++) {
+    //         tableOfContents.push('<tr>\n');
 
-            for (var j = 0; j < numTypesPerRow; j++) {
-                var type = ctx.types[i*numTypesPerRow + j];
-                if (type) {
-                    tableOfContents.push('<td><a href="#');
-                    tableOfContents.push(type.toLowerCase());
-                    tableOfContents.push('">');
-                    tableOfContents.push(type);
-                    tableOfContents.push('</a></td>\n');
-                }
-            }
+    //         for (var j = 0; j < numTypesPerRow; j++) {
+    //             var type = ctx.types[i*numTypesPerRow + j];
+    //             if (type) {
+    //                 tableOfContents.push('<td><a href="#');
+    //                 tableOfContents.push(type.toLowerCase());
+    //                 tableOfContents.push('">');
+    //                 tableOfContents.push(type);
+    //                 tableOfContents.push('</a></td>\n');
+    //             }
+    //         }
 
-            tableOfContents.push('</tr>\n');
-        }
+    //         tableOfContents.push('</tr>\n');
+    //     }
 
-        tableOfContents.push('</tbody>\n</table>\n');
-        return tableOfContents.join('');
-    }
+    //     tableOfContents.push('</tbody>\n</table>\n');
+    //     return tableOfContents.join('');
+    // }
 })();
