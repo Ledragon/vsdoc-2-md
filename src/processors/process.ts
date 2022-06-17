@@ -1,6 +1,7 @@
-import ProcessorMap from "./ProcessorMap";
+import { Context } from '../Context';
+import ProcessorMap from '../ProcessorMap';
 
-export function process(ctx, node) {
+export function process(ctx: Context, node) {
     for (var i = 0; i < node.childNodes.length; i++) {
         var childNode = node.childNodes[i];
 

@@ -1,3 +1,5 @@
+import { processAssembly, processDoc } from './processors/';
+
 const ProcessorMap = {
     'doc': processDoc,
     'assembly': processAssembly,
