@@ -1,0 +1,34 @@
+{
+    "rules": {
+      "quotemark": [
+        true,
+        "single"
+      ],
+      "indent": [
+        true,
+        "spaces",
+        4
+      ],
+      "curly": true,
+      "semicolon": [
+        true,
+        "always",
+        "ignore-interfaces"
+      ],
+      "no-inferrable-types": [
+        false,
+        "ignore-params",
+        "ignore-properties"
+      ],
+      "prefer-const": true,
+      "no-unsafe-finally": true,
+      "static-this": true,
+      "use-isnan": true,
+      "class-name": true,
+      "array-type": [true, "array"],
+      "no-for-in": false,
+      "no-reference": true,
+      "no-duplicate-switch-case": true,
+      "no-duplicate-variable": true
+    }
+  }
