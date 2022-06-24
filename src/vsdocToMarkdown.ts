@@ -3,9 +3,12 @@ import { process } from './processors';
 import { getTableOfContents } from './getTableOfContents';
 import { stripEmptyTextNodes } from './utils';
 
-export function vsdocToMarkdown(vsdoc: string) {
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(vsdoc, 'text/xml');
+/**
+ * Converts an XML document to a markdown string.
+ * @param xml The parsed xml file content.
+ * @returns The markdown produced from the xml.
+ */
+export function vsdocToMarkdown(xml: Document) {
     const ctx: Context = {
         markdown: [], // Output will be appended here.
         paramTypes: {}, // Used to map method signature names to types.
