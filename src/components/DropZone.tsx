@@ -2,7 +2,7 @@ import * as React from 'react';
 import { vsdocToMarkdown } from '../vsdocToMarkdown';
 
 interface DropZoneProps {
-
+    onXmlConverted?: (markdown: string) => void;
 }
 
 class DropZone extends React.Component<DropZoneProps>{
@@ -49,13 +49,14 @@ class DropZone extends React.Component<DropZoneProps>{
     private loadFile(file: File) {
         // loadingIndicator.classList.remove('transparent');
         const reader = new FileReader();
-        const self = this;
         reader.onload = (ev) => {
             try {
                 const parser = new DOMParser();
                 const xml = parser.parseFromString(reader.result as any, 'text/xml');
                 const value = vsdocToMarkdown(xml);
-                console.log(value);
+                if(this.props.onXmlConverted){
+                    this.props.onXmlConverted(value);
+                }
                 // onChangeMarkdown();
                 // dropzoneContainer.classList.remove('initial');
                 // dropzone.classList.remove('initial');
@@ -63,14 +64,14 @@ class DropZone extends React.Component<DropZoneProps>{
                 // markdownEditor.scrollTop = 0;
                 // markdownPreview.scrollTop = 0;
             } catch (err) {
-                self.handleError(err);
+                this.handleError(err);
             }
             // loadingIndicator.classList.add('transparent');
         }
         try {
             reader.readAsText(file);
         } catch (err) {
-            self.handleError(err);
+            this.handleError(err);
         }
     }
 
@@ -90,9 +91,9 @@ class DropZone extends React.Component<DropZoneProps>{
                     onDragLeave={this.onDragLeave}
                     onDrop={this.onDrop}
                     onClick={this.onClickDropzone}>
-                    <img src="./img/loading.gif" alt="Loading" className="transparent" width="48" height="48"></img>
+                    <img alt="Loading" className="transparent" width="48" height="48"></img>
                     Drag &amp; drop Visual Studio XML documentation file here or click to browse.
-                    <img id="loading-indicator" src="./img/loading.gif" alt="Loading" width="48" height="48" className="transparent"></img>
+                    <img id="loading-indicator" alt="Loading" width="48" height="48" className="transparent"></img>
                 </section>
                 <input type="file" accept=".xml" id="dropzone-dialog" name="dropzone-dialog" className="hide" />
             </section>

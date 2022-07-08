@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface MardownEditorProps {
-
+    mardown: string;
 }
 
 const MardownEditor = (props?: MardownEditorProps, context?: any) => {
@@ -16,7 +16,8 @@ const MardownEditor = (props?: MardownEditorProps, context?: any) => {
             <section className="content">
                 <textarea id="markdown-editor"
                     className="markdown-editor"
-                    spellCheck="false">
+                    spellCheck="false"
+                    value={props.mardown}>
                 </textarea>
             </section>
         </section>

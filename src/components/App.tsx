@@ -6,16 +6,28 @@ import MardownEditor from './MarkdownEditor';
 interface AppProps {
 
 }
+interface AppState {
+    markdown: string;
+}
 
-const App = (props?: AppProps, context?: any) => {
-    return (
-        <div className="viewport">
-            <DropZone />
-            <section className="content-section-container">
-                <MardownEditor></MardownEditor>
-                <MardownPreview></MardownPreview>
-            </section>
-        </div>
-    )
+class App extends React.Component<AppProps, AppState> {
+    constructor(props: AppProps) {
+        super(props);
+        this.state = {
+            markdown: ''
+        };
+    }
+    
+    render(): React.ReactNode {
+        return (
+            <div className="viewport">
+                <DropZone onXmlConverted={markdown => this.setState({ markdown })} />
+                <section className="content-section-container">
+                    <MardownEditor mardown={this.state.markdown}></MardownEditor>
+                    <MardownPreview></MardownPreview>
+                </section>
+            </div>
+        );
+    }
 }
 export default App;

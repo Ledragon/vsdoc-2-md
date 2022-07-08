@@ -272,3 +272,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, hr, i, main
 
 .hide { display: none !important; }
 .transparent { visibility: hidden !important; }
+
+img.loading-indicator{
+    src: './loading.gif';
+}
