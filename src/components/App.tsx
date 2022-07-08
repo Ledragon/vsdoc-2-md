@@ -17,14 +17,14 @@ class App extends React.Component<AppProps, AppState> {
             markdown: ''
         };
     }
-    
+
     render(): React.ReactNode {
         return (
             <div className="viewport">
                 <DropZone onXmlConverted={markdown => this.setState({ markdown })} />
                 <section className="content-section-container">
-                    <MardownEditor mardown={this.state.markdown}></MardownEditor>
-                    <MardownPreview></MardownPreview>
+                    <MardownEditor markdown={this.state.markdown}></MardownEditor>
+                    <MardownPreview markdown={this.state.markdown}></MardownPreview>
                 </section>
             </div>
         );

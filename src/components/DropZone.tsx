@@ -5,7 +5,11 @@ interface DropZoneProps {
     onXmlConverted?: (markdown: string) => void;
 }
 
-class DropZone extends React.Component<DropZoneProps>{
+interface DropZoneState {
+    fileName: string | null;
+}
+
+class DropZone extends React.Component<DropZoneProps, DropZoneState>{
     constructor(props: DropZoneProps) {
         super(props);
         this.dragEnter = this.dragEnter.bind(this);
@@ -14,6 +18,10 @@ class DropZone extends React.Component<DropZoneProps>{
         this.onDrop = this.onDrop.bind(this);
         this.onDropToDropzone = this.onDropToDropzone.bind(this);
         this.onClickDropzone = this.onClickDropzone.bind(this);
+
+        this.state = {
+            fileName: null
+        };
     }
 
     private dragEnter(event: React.DragEvent) {
@@ -54,13 +62,10 @@ class DropZone extends React.Component<DropZoneProps>{
                 const parser = new DOMParser();
                 const xml = parser.parseFromString(reader.result as any, 'text/xml');
                 const value = vsdocToMarkdown(xml);
-                if(this.props.onXmlConverted){
+                if (this.props.onXmlConverted) {
                     this.props.onXmlConverted(value);
                 }
-                // onChangeMarkdown();
-                // dropzoneContainer.classList.remove('initial');
-                // dropzone.classList.remove('initial');
-                // dropzone.innerHTML = file.name;
+                this.setState({ fileName: file.name });
                 // markdownEditor.scrollTop = 0;
                 // markdownPreview.scrollTop = 0;
             } catch (err) {
@@ -83,9 +88,10 @@ class DropZone extends React.Component<DropZoneProps>{
     }
 
     render(): React.ReactNode {
+        const initial = this.state.fileName ? '' : 'initial';
         return (
-            <section id="dropzone-container" className="dropzone-container initial">
-                <section id="dropzone" className="dropzone initial"
+            <section id="dropzone-container" className={"dropzone-container " + initial}>
+                <section id="dropzone" className={"dropzone " + initial}
                     onDragEnter={this.dragEnter}
                     onDragOver={this.onDragOver}
                     onDragLeave={this.onDragLeave}

@@ -1,0 +1,7 @@
+img.loading-indicator{
+    src: './loading.gif';
+}
+
+.viewport{
+    height: 100%;
+}
