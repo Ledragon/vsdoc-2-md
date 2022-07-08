@@ -1,10 +1,12 @@
+import './content/style.css';
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { Hello } from './components/Hello';
+import App from './components/App';
 
-const container = document.getElementById('main');
+const container = document.getElementsByClassName('viewport')[0];
 ReactDOM.render(
-    <Hello />, 
+    <App />,
     container
 );
