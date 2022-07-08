@@ -8,6 +8,7 @@
         "outDir": "./dist",
         "declaration": false,
         "moduleResolution": "node",
-        "baseUrl": "./"
+        "baseUrl": "./",
+        "jsx": "react"
     }
 }
