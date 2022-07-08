@@ -18,10 +18,14 @@
   },
   "homepage": "https://github.com/Ledragon/vsdoc-2-md#readme",
   "devDependencies": {
+    "@types/jsdom": "16.2.14",
     "@types/marked": "4.0.3",
+    "@types/xml2js": "0.4.11",
     "typescript": "4.7.3"
   },
   "dependencies": {
-    "marked": "4.0.17"
+    "jsdom": "20.0.0",
+    "marked": "4.0.17",
+    "xml2js": "0.4.23"
   }
 }
